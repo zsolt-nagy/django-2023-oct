@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <h1>{{ title }}</h1>
+
+        <ul>
+            <li><a href="{% url 'admin:index' %}">Login</a></li>
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'store' %}">Store</a></li>
+        </ul>
+
+        {% if request.user.is_authenticated %}
+        <p>Welcome, {{ request.user.username }}!</p>
+        {% else %}
+        <p><a href="{% url 'admin:index' %}">Login</a></p>
+        {% endif %}
+
+        <!-- Content block -->
+        {% block content %}
+        <!-- Content -->
+        {% endblock %}
+    </body>
+</html>
