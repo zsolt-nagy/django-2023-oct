@@ -59,12 +59,13 @@
                 </div>
             </nav>
         </header>
+        <main class="container mx-5">
+            <h1>{{ title }}</h1>
 
-        <h1>{{ title }}</h1>
-
-        <!-- Content block -->
-        {% block content %}
-        <!-- Content -->
-        {% endblock %}
+            <!-- Content block -->
+            {% block content %}
+            <!-- Content -->
+            {% endblock %}
+        </main>
     </body>
 </html>

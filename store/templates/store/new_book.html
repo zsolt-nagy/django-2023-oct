@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+<!-- content area -->
+{% block content %}
+
+<h2>request.method: {{ request.method }}</h2>
+
+{% if request.method == 'GET' %}
+<form method="POST" action="{% url 'new_book' %}">
+    <!-- Cross-Site Request Forgery token -->
+    {% csrf_token %}
+    <div class="container m-4">
+        <div class="mb-3 row">
+            <label for="title-field" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title-field" name="title" required />
+        </div>
+        <div class="mb-3 row">
+            <label for="author-field" class="form-label">Author</label>
+            <input type="text" class="form-control" id="author-field" name="author" required />
+        </div>
+        <div class="mb-3 row">
+            <label for="description-field" class="form-label">Description</label>
+            <textarea class="form-control" id="description-field" rows="3" name="description" required></textarea>
+        </div>
+        <div class="mb-3 row">
+            <label for="pubdate-field" class="form-label">Date of Publication</label>
+            <input type="date" class="form-control" id="pubdate-field" name="pubdate" required />
+        </div>
+        <div class="mb-3 row">
+            <label for="price-field" class="form-label">Price</label>
+            <input type="number" min="0" step="0.01" class="form-control" id="price-field" name="price" required />
+        </div>
+        <div class="mb-3 row">
+            <label for="stock-field" class="form-label">Stock</label>
+            <input type="number" min="0" step="1" class="form-control" id="stock-field" name="stock" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+{% else %}<!-- POST -->
+
+<p>The book has been created.</p>
+
+{% endif %}
+<!---->
+{% endblock %}
