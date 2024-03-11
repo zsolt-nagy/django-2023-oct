@@ -22,8 +22,18 @@ def store(request):
 
 
 def new_book(request):
+    print(request.method)
     context = {
         'title': 'New Book',
+        'book': {
+            'title': '',
+            'author': '',
+            'description': '',
+            'publish_date': '',
+            'price': '',
+            'stock': '',
+        },
+        'form_action': 'new_book',
     }
     if request.method == 'POST':
         try:
@@ -32,7 +42,6 @@ def new_book(request):
             author = request.POST.get('author')
             description = request.POST.get('description')
             publish_date = request.POST.get('pubdate')
-
             price = request.POST.get('price')
             stock = request.POST.get('stock')
 
@@ -53,7 +62,7 @@ def new_book(request):
             # Handle exceptions, e.g., invalid data format or missing required fields
             context['message'] = 'Error creating book, please try again later.'
 
-    return render(request, 'store/new_book.html', context)
+    return render(request, 'store/book_form.html', context)
 
 
 def book_details(request, id):
@@ -63,3 +72,31 @@ def book_details(request, id):
         'book': book,
     }
     return render(request, 'store/book_details.html', context)
+
+
+def edit_book(request, id):
+    book = Book.objects.get(id=id)
+    context = {
+        'title': 'Edit Book',
+        'book': book,
+        'id': id,
+        'form_action': 'edit_book',
+    }
+
+    if request.method == 'POST':
+        try:
+            # Extract data from POST request
+            book = Book.objects.get(id=id)
+
+            book.title = request.POST.get('title')
+            book.author = request.POST.get('author')
+            book.description = request.POST.get('description')
+            book.publish_date = request.POST.get('pubdate')
+            book.price = request.POST.get('price')
+            book.stock = request.POST.get('stock')
+            book.save()
+            context['message'] = 'The book has been updated.'
+        except:
+            context['message'] = 'Update failed. Try again later.'
+
+    return render(request, 'store/book_form.html', context)
