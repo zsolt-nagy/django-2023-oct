@@ -6,7 +6,7 @@
 
 <ul>
     {% for book in books %}
-    <li>{{ book.title }} ({{ book.author }})</li>
+    <li><a href="{% url 'book_details' book.id %}">{{ book.title }} ({{ book.author }})</a></li>
     {% endfor %}
 </ul>
 {% endblock %}

@@ -54,3 +54,12 @@ def new_book(request):
             context['message'] = 'Error creating book, please try again later.'
 
     return render(request, 'store/new_book.html', context)
+
+
+def book_details(request, id):
+    book = Book.objects.get(id=id)
+    context = {
+        'title': 'Book Details',
+        'book': book,
+    }
+    return render(request, 'store/book_details.html', context)

@@ -3,8 +3,7 @@
 <!-- content area -->
 {% block content %}
 
-<h2>request.method: {{ request.method }}</h2>
-
+<!-- form or creation message -->
 {% if request.method == 'GET' %}
 <form method="POST" action="{% url 'new_book' %}">
     <!-- Cross-Site Request Forgery token -->
