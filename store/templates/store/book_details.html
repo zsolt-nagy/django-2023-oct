@@ -16,5 +16,6 @@
 <p>Stock: {{ book.stock }}</p>
 
 <a class="btn btn-primary btn-gradient" href="{% url 'edit_book' book.id %}">Edit</a>
+<a class="btn btn-danger btn-gradient" href="{% url 'delete_book' book.id %}">Delete</a>
 
 {% endblock %}

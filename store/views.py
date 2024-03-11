@@ -100,3 +100,17 @@ def edit_book(request, id):
             context['message'] = 'Update failed. Try again later.'
 
     return render(request, 'store/book_form.html', context)
+
+
+def delete_book(request, id):
+    context = {
+        'title': 'Delete Book'
+    }
+    try:
+        book = Book.objects.get(id=id)
+        book.delete()
+        context['message'] = 'The book has been deleted.'
+    except:
+        context['message'] = 'Error deleting book. Try again.'
+
+    return render(request, 'store/delete_book.html', context)
