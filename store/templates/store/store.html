@@ -4,9 +4,25 @@
 {% block content %}
 <p>There {{ count|pluralize:"is,are" }} {{ count }} book{{ count|pluralize }} in stock.</p>
 
-<ul>
-    {% for book in books %}
-    <li><a href="{% url 'book_details' book.id %}">{{ book.title }} ({{ book.author }})</a></li>
-    {% endfor %}
-</ul>
+<table>
+    <tbody>
+        {% for book in books %}
+        <tr class="book-table-row">
+            <td class="px-2">
+                <a href="{% url 'book_details' book.id %}">
+                    {{ book.title }} ({{ book.author }})
+                </a>
+            </td>
+            <td class="px-2">
+                <a class="btn btn-primary btn-gradient" href="{% url 'edit_book' book.id %}">
+                    <i class="bi bi-pencil"></i>
+                </a>
+                <a class="btn btn-danger btn-gradient" href="{% url 'delete_book' book.id %}">
+                    <i class="bi bi-trash"></i>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}
